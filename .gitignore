@@ -1,0 +1,101 @@
+# ==========================================
+# PYTHON
+# ==========================================
+# Ambientes virtuais
+.venv/
+venv/
+env/
+ENV/
+pyenv/
+
+# Caches e arquivos compilados
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Distribuição e pacotes
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ==========================================
+# JAVASCRIPT / NODE.JS
+# ==========================================
+# Dependências do Node
+node_modules/
+jspm_packages/
+
+# Logs do NPM e Yarn
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Caches de ferramentas de build (Next.js, Nuxt, Gatsby, Vite, etc.)
+.next/
+.nuxt/
+.gatsby/
+.vuepress/dist
+.docusaurus/
+.turbo/
+dist/
+out/
+build/
+
+# Cache do TypeScript
+*.tsbuildinfo
+
+# ==========================================
+# SEGURANÇA (Para ambas as linguagens)
+# ==========================================
+# Arquivos de configuração de variáveis de ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# ==========================================
+# SISTEMA OPERACIONAL E IDEs
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+EnunProj.pdf
