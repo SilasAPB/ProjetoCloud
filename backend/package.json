@@ -1,0 +1,24 @@
+{
+  "name": "ticket-backend",
+  "version": "1.0.0",
+  "description": "Backend Serverless para o projeto de ingressos",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "serverless deploy"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.0.0",
+    "@aws-sdk/client-sqs": "^3.0.0",
+    "@aws-sdk/lib-dynamodb": "^3.0.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.119",
+    "@types/node": "^20.0.0",
+    "@types/uuid": "^9.0.2",
+    "esbuild": "^0.18.11",
+    "serverless": "^3.33.0",
+    "serverless-esbuild": "latest",
+    "typescript": "^5.1.6"
+  }
+}

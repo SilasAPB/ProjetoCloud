@@ -1,0 +1,86 @@
+service: ticketing-backend
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    # Vamos pegar as referências das tabelas a partir do Terraform depois
+    USERS_TABLE: Users
+    EVENTS_TABLE: Events
+    PAYMENTS_TABLE: Payments
+    QUEUE_URL: "https://sqs.us-east-1.amazonaws.com/202757356229/payments-queue"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+            - dynamodb:GetItem
+            - dynamodb:Scan
+            - dynamodb:UpdateItem
+            - dynamodb:Query
+          Resource: "arn:aws:dynamodb:us-east-1:*:table/*"
+        - Effect: Allow
+          Action:
+            - sqs:SendMessage
+          Resource: "arn:aws:sqs:us-east-1:*:payments-queue"
+
+plugins:
+  - serverless-esbuild
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+
+functions:
+  # Rota para Criar Usuário
+  createUser:
+    handler: src/functions/createUser.handler
+    events:
+      - httpApi:
+          path: /users
+          method: post
+
+  # Rota para Criar Evento
+  createEvent:
+    handler: src/functions/createEvent.handler
+    events:
+      - httpApi:
+          path: /events
+          method: post
+
+  # Rota para Listar todos os Eventos
+  listEvents:
+    handler: src/functions/listEvents.handler
+    events:
+      - httpApi:
+          path: /events
+          method: get
+
+  # Rota Produtora (Compra de Ingresso)
+  createPayment:
+    handler: src/functions/createPayment.handler
+    events:
+      - httpApi:
+          path: /payments
+          method: post
+
+  # Rota Consumidora (Worker que lê do SQS)
+  processPayment:
+    handler: src/functions/processPayment.handler
+    events:
+      - sqs:
+          arn: "arn:aws:sqs:us-east-1:202757356229:payments-queue"
+          batchSize: 10
+
+  # Rota de Polling (Consultar Status da Compra)
+  getPaymentStatus:
+    handler: src/functions/getPaymentStatus.handler
+    events:
+      - httpApi:
+          path: /payments/{paymentId}
+          method: get
